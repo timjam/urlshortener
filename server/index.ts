@@ -4,6 +4,7 @@ import cors from "cors";
 
 import hello from "./hello";
 import robots from "./robots";
+import { urlShortener } from "./urlShortener";
 
 const app = express();
 const port = process.env.PORT || 4001;
@@ -17,6 +18,7 @@ app.use(json());
 // Controllers
 app.get("/hello", hello);
 app.get("/robots.txt", robots);
+app.use("/", urlShortener);
 
 if (devMode) {
   console.info('[server] Skipping static file server + SPA router for development mode');
