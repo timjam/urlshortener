@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
 
-import App from "./App";
+import App from "../src/App";
 
 vi.mock("axios", () => ({
   default: {
