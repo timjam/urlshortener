@@ -35,8 +35,8 @@ export default () =>
       proxy: {
         '/hello': 'http://localhost:4001',
         '/addUrl': 'http://localhost:4001',
-        '/allUrlStats': 'http://localhost:4001',
-        '/stats': 'http://localhost:4001'
+        '/urlStats': 'http://localhost:4001',
+        '/u': 'http://localhost:4001'
 
       }
     },
