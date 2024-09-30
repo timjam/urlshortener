@@ -2,26 +2,19 @@
     "3bf848c54693922a1d861e130f80751c": {
         "shortUrl": "3bf848c54693922a1d861e130f80751c",
         "originalUrl": "https://yle.fi/",
-        "accessed": {}
+        "accessed": {
+            "2024-09-28": 17,
+            "2024-09-29": 6,
+            "2024-09-30": 5
+        }
     },
     "ab3201c6103205c14f6e56b11b2fcd46": {
         "shortUrl": "ab3201c6103205c14f6e56b11b2fcd46",
         "originalUrl": "https://www.youtube.com",
-        "accessed": {}
-    },
-    "1ab21844aceb665fbbdc86a345c85308": {
-        "shortUrl": "1ab21844aceb665fbbdc86a345c85308",
-        "originalUrl": "www.is.fi",
-        "accessed": {}
-    },
-    "93e3ed1bb05e994cd7ef9780af533fc1": {
-        "shortUrl": "93e3ed1bb05e994cd7ef9780af533fc1",
-        "originalUrl": "www.hs.fi",
-        "accessed": {}
-    },
-    "d3445220bb2794d477330dff364c460d": {
-        "shortUrl": "d3445220bb2794d477330dff364c460d",
-        "originalUrl": "https://www.kauppalehti.fi",
-        "accessed": {}
+        "accessed": {
+            "2024-09-28": 1234567,
+            "2024-09-29": 12345,
+            "2024-09-30": 5
+        }
     }
 }
