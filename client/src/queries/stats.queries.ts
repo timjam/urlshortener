@@ -14,9 +14,7 @@ export const useStats = (shortUrl: string) => {
     const { isPending, error, data, isFetching } = useQuery({
         queryKey: ["stats", shortUrl],
         queryFn: async () => {
-            console.info('Querying')
-            const response = await axios.get(`/stats/${shortUrl}`);
-            console.log(JSON.stringify({ response }, null, 2));
+            const response = await axios.get('/urlStats', { params: { shortUrl } });
             return UrlStats.parse(response.data);
         },
     });

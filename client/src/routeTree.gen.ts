@@ -14,6 +14,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as StatsImport } from './routes/stats'
+import { Route as UShortUrlImport } from './routes/u.$shortUrl'
 
 // Create Virtual Routes
 
@@ -30,12 +31,17 @@ const HelloLazyRoute = HelloLazyImport.update({
 const StatsRoute = StatsImport.update({
   path: '/stats',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() => import('./routes/stats.lazy').then((d) => d.Route))
 
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const UShortUrlRoute = UShortUrlImport.update({
+  path: '/u/$shortUrl',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -62,6 +68,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelloLazyImport
       parentRoute: typeof rootRoute
     }
+    '/u/$shortUrl': {
+      id: '/u/$shortUrl'
+      path: '/u/$shortUrl'
+      fullPath: '/u/$shortUrl'
+      preLoaderRoute: typeof UShortUrlImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -71,12 +84,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/stats': typeof StatsRoute
   '/hello': typeof HelloLazyRoute
+  '/u/$shortUrl': typeof UShortUrlRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/stats': typeof StatsRoute
   '/hello': typeof HelloLazyRoute
+  '/u/$shortUrl': typeof UShortUrlRoute
 }
 
 export interface FileRoutesById {
@@ -84,14 +99,15 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute
   '/stats': typeof StatsRoute
   '/hello': typeof HelloLazyRoute
+  '/u/$shortUrl': typeof UShortUrlRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/stats' | '/hello'
+  fullPaths: '/' | '/stats' | '/hello' | '/u/$shortUrl'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/stats' | '/hello'
-  id: '__root__' | '/' | '/stats' | '/hello'
+  to: '/' | '/stats' | '/hello' | '/u/$shortUrl'
+  id: '__root__' | '/' | '/stats' | '/hello' | '/u/$shortUrl'
   fileRoutesById: FileRoutesById
 }
 
@@ -99,12 +115,14 @@ export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   StatsRoute: typeof StatsRoute
   HelloLazyRoute: typeof HelloLazyRoute
+  UShortUrlRoute: typeof UShortUrlRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   StatsRoute: StatsRoute,
   HelloLazyRoute: HelloLazyRoute,
+  UShortUrlRoute: UShortUrlRoute,
 }
 
 export const routeTree = rootRoute
@@ -121,7 +139,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/stats",
-        "/hello"
+        "/hello",
+        "/u/$shortUrl"
       ]
     },
     "/": {
@@ -132,6 +151,9 @@ export const routeTree = rootRoute
     },
     "/hello": {
       "filePath": "hello.lazy.tsx"
+    },
+    "/u/$shortUrl": {
+      "filePath": "u.$shortUrl.tsx"
     }
   }
 }
