@@ -21,3 +21,7 @@ export const useStats = (shortUrl: string) => {
 
     return { isPending, error, data, isFetching };
 };
+
+export const deleteUrl = async (shortUrl: string) => {
+    return axios.delete(`/deleteUrl/${shortUrl}`);
+}

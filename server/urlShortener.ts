@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addNewUrl, getOriginalUrl, getStats } from './db/jsonDb';
+import { addNewUrl, deleteUrl, getOriginalUrl, getStats } from './db/jsonDb';
 
 const urlShortener = Router();
 
@@ -28,6 +28,12 @@ urlShortener.get("/u/:shortUrl", async (req, res) => {
         return res.status(404).json({ error: "URL not found" });
     }
     return res.redirect(longUrl)
+});
+
+urlShortener.delete("/deleteUrl/:shortUrl", async (req, res) => {
+    const { shortUrl } = req.params;
+    const deleted = await deleteUrl(shortUrl);
+    return res.json({ deleted });
 });
 
 

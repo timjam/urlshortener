@@ -96,3 +96,13 @@ export const getStats = async (shortUrl: string) => {
         return null;
     }
 }
+
+export const deleteUrl = async (shortUrl: string) => {
+    try {
+        db.delete(`/${shortUrl}`);
+        return true;
+    } catch (error) {
+        console.error(`Couldn't delete ${shortUrl} - ${error}`);
+        return false;
+    }
+};

@@ -36,7 +36,8 @@ export default () =>
         '/hello': 'http://localhost:4001',
         '/addUrl': 'http://localhost:4001',
         '/urlStats': 'http://localhost:4001',
-        '/u': 'http://localhost:4001'
+        '/u': 'http://localhost:4001',
+        '/deleteUrl': 'http://localhost:4001',
 
       }
     },
