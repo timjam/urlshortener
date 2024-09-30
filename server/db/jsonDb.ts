@@ -12,16 +12,23 @@ export const UrlStats = z.object({
 
 export type UrlStats = z.infer<typeof UrlStats>;
 
+export const AllData = z.record(UrlStats);
+
+export type AllData = z.infer<typeof AllData>;
+
 const urlExists = async (url: string) => {
     try {
         const urls = await db.getData('/');
-        const existing = urls.find((item: any) => item.originalUrl === url);
 
-        if (!existing) {
+        const parsedUrls = AllData.parse(urls);
+
+        const existing = Object.values(parsedUrls).filter((item) => item.originalUrl === url);
+
+        if (existing.length !== 1) {
             return null;
         }
         
-        return UrlStats.parse(existing);
+        return existing[0];
     } catch (error) {
         console.error(`Faulty item in db - ${error}`);
         return null;

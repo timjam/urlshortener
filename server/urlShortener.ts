@@ -17,8 +17,9 @@ urlShortener.get("/stats", async (req, res) => {
     return res.json(data);
 });
 
-urlShortener.post("/addUrl", (req, res) => {
-    const shortUrl = addNewUrl(req.body.url)
+urlShortener.post("/addUrl", async (req, res) => {
+    const shortUrl = await addNewUrl(req.body.url);
+    console.log(JSON.stringify({ shortUrl }, null, 2));
     return res.json({ shortUrl });
 });
 
