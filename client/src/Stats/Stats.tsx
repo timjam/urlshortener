@@ -4,7 +4,6 @@ import { useStats } from '../queries/stats.queries';
 import {
     Table,
     TableBody,
-    TableCaption,
     TableHead,
     TableHeader,
     TableRow,
@@ -31,17 +30,20 @@ export const Stats = () => {
     }
 
     return (
-        <Table>
-            <TableCaption>Short URL stats for ${data.originalUrl}</TableCaption>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Date</TableHead>
-                    <TableHead>Accessed</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {Object.entries(data.accessed).map(([date, count]) => <StatsTableRow key={`${data.shortUrl}-${date}`} date={date} accessed={count} />)}
-            </TableBody>
-        </Table>
+        <div className="container py-10">
+            <Table>
+                <TableHeader>
+                    <TableRow className="border-b">
+                        <TableHead className="w-[180px] px-4 py-2">Date</TableHead>
+                        <TableHead className="px-4 py-2 text-left">Access Count</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {Object.entries(data.accessed).map(([date, count]) => (
+                        <StatsTableRow key={date} date={date} count={count} />
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
     );
 };
