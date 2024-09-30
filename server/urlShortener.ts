@@ -22,7 +22,7 @@ urlShortener.post("/addUrl", (req, res) => {
     return res.json({ shortUrl });
 });
 
-urlShortener.get("/:shortUrl", async (req, res) => {
+urlShortener.get("/u/:shortUrl", async (req, res) => {
     const longUrl = await getOriginalUrl(req.params.shortUrl);
     if (!longUrl) {
         return res.status(404).json({ error: "URL not found" });
