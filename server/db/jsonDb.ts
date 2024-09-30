@@ -81,7 +81,6 @@ export const getOriginalUrl = async (shortUrl: string) => {
 
         return data.originalUrl;
     } catch (error) {
-        console.log('Error happened')
         console.error(error);
         return null;
     }

@@ -3,7 +3,7 @@ import { addNewUrl, getOriginalUrl, getStats } from './db/jsonDb';
 
 const urlShortener = Router();
 
-urlShortener.get("/stats", async (req, res) => {
+urlShortener.get("/urlStats", async (req, res) => {
     const { shortUrl } = req.query;
 
     if (!shortUrl || typeof shortUrl !== 'string' ) {
@@ -19,7 +19,6 @@ urlShortener.get("/stats", async (req, res) => {
 
 urlShortener.post("/addUrl", async (req, res) => {
     const shortUrl = await addNewUrl(req.body.url);
-    console.log(JSON.stringify({ shortUrl }, null, 2));
     return res.json({ shortUrl });
 });
 
