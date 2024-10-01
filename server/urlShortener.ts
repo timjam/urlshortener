@@ -11,9 +11,6 @@ urlShortener.get("/urlStats", async (req, res) => {
     }
 
     const data = await getStats(shortUrl);
-    if (!data) {
-        return res.status(404).json({ error: "URL not found" });
-    }
     return res.json(data);
 });
 

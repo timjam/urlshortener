@@ -15,7 +15,7 @@ export const useStats = (shortUrl: string) => {
         queryKey: ["stats", shortUrl],
         queryFn: async () => {
             const response = await axios.get('/urlStats', { params: { shortUrl } });
-            return UrlStats.parse(response.data);
+            return UrlStats.nullable().parse(response.data);
         },
     });
 

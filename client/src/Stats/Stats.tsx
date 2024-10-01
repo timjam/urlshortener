@@ -13,8 +13,7 @@ import { StatsTableRow } from './StatsTableRow';
 import { Button } from '@/components/ui/button';
 import { TrashIcon } from "lucide-react"
 import { useMutation } from '@tanstack/react-query';
-import { redirect } from '@tanstack/react-router';
-
+import { queryClient } from '../queries/queryClient';
 
 export const Stats = () => {
 
@@ -22,9 +21,11 @@ export const Stats = () => {
     const { isPending, error, data } = useStats(shortUrl);
     const mutation = useMutation({
         mutationFn: deleteUrl,
-        onSuccess: async () => redirect({
-            to: "/"
-        })
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["stats", shortUrl]
+            });
+        }
     });
 
     const handleDelete = () => {
@@ -37,10 +38,6 @@ export const Stats = () => {
 
     if (error) {
         return <p>Error: {error.message}</p>;
-    }
-
-    if (!data) {
-        return <p>No data</p>;
     }
 
     return (
@@ -62,7 +59,7 @@ export const Stats = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {Object.entries(data.accessed).map(([date, count]) => (
+                    {data && Object.entries(data.accessed).map(([date, count]) => (
                         <StatsTableRow key={date} date={date} count={count} />
                     ))}
                 </TableBody>
